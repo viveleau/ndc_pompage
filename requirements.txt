@@ -1,4 +1,5 @@
-streamlit
-matplotlib
-numpy
-pandas
+streamlit>=1.28.0
+matplotlib>=3.7.0
+numpy>=1.21.0
+pandas>=1.5.0
+reportlab>=4.0.0
