@@ -935,6 +935,32 @@ def exporter_pdf(resultats, calculateur):
     
     story = []
     
+    # Fonction pour ajouter le filigrane en arrière-plan
+    def add_watermark(canvas, doc):
+        canvas.saveState()
+        
+        # Configuration du filigrane
+        watermark_text = "By Viveleau 2025 - https://viveleau-services.com/ is the owner"
+        
+        # Positionner le filigrane en diagonale au centre de la page
+        canvas.setFillColor(colors.HexColor('#000000', alpha=0.1))  # Noir avec transparence
+        canvas.setFont("Helvetica", 16)
+        
+        # Rotation de 45 degrés
+        canvas.rotate(45)
+        
+        # Positionner le filigrane au centre de la page
+        # Répéter le filigrane sur toute la page
+        for i in range(-3, 4):
+            for j in range(-3, 4):
+                canvas.drawCentredString(
+                    x=100 + i * 200, 
+                    y=100 + j * 150, 
+                    text=watermark_text
+                )
+        
+        canvas.restoreState()
+    
     # Titre principal
     title = Paragraph("RAPPORT D'ANALYSE HYDRAULIQUE COMPLET", styles['Title'])
     story.append(title)
@@ -1154,9 +1180,12 @@ def exporter_pdf(resultats, calculateur):
     ]))
     story.append(table_belier)
     
-    doc.build(story)
+    # Construire le document avec le filigrane
+    doc.build(story, onFirstPage=add_watermark, onLaterPages=add_watermark)
     buffer.seek(0)
     return buffer
+
+# Le reste du code (fonction main()) reste inchangé...
 
 def main():
     """Fonction principale de l'application"""
@@ -1416,6 +1445,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
