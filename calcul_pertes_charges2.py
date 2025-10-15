@@ -1409,17 +1409,21 @@ def main():
                 file_name=f"rapport_hydraulique_complet_{datetime.now().strftime('%Y%m%d_%H%M')}.pdf",
                 mime="application/pdf"
             )
+            except Exception as e:
+        pdf.set_font("Arial", 'I', 10)
+        pdf.cell(0, 8, f"Erreur lors de la génération du diagramme: {str(e)}", 0, 1)
             # Ajouter le filigrane
-    pdf.set_font("Arial", 'I', 40)
-    pdf.set_text_color(200, 200, 200)  # Gris clair
-    pdf.rotate(45)  # Rotation à 45 degrés
-    pdf.text(60, 150, "By Viveleau 2025")
-    pdf.rotate(0)  # Remettre à 0 degrés
-    pdf.set_text_color(0, 0, 0)  # Remettre en noir
-    
-    pdf.ln(10)
-    pdf.set_font("Arial", 'I', 10)
-    pdf.cell(0, 8, "Généré automatiquement par l'application Diagramme de Viveleau", 0, 1)
+        pdf.set_font("Arial", 'I', 40)
+        pdf.set_text_color(200, 200, 200)  # Gris clair
+        pdf.rotate(45)  # Rotation à 45 degrés
+        pdf.text(60, 150, "By Viveleau 2025")
+        pdf.rotate(0)  # Remettre à 0 degrés
+        pdf.set_text_color(0, 0, 0)  # Remettre en noir
+        
+        pdf.ln(10)
+        pdf.set_font("Arial", 'I', 10)
+        pdf.cell(0, 8, "Généré automatiquement par l'application Diagramme de Viveleau", 0, 1)
 if __name__ == "__main__":
 
     main()
+
