@@ -943,7 +943,8 @@ def exporter_pdf(resultats, calculateur):
         watermark_text = "By Viveleau 2025 - https://viveleau-services.com/ is the owner"
         
         # Positionner le filigrane en diagonale au centre de la page
-        canvas.setFillColor(colors.HexColor('#000000', alpha=0.1))  # Noir avec transparence
+        # Utiliser setFillColorRGB avec alpha pour la transparence
+        canvas.setFillColorRGB(0, 0, 0, alpha=0.1)  # Noir avec transparence
         canvas.setFont("Helvetica", 16)
         
         # Rotation de 45 degrés
@@ -1184,7 +1185,6 @@ def exporter_pdf(resultats, calculateur):
     doc.build(story, onFirstPage=add_watermark, onLaterPages=add_watermark)
     buffer.seek(0)
     return buffer
-
 # Le reste du code (fonction main()) reste inchangé...
 
 def main():
@@ -1445,6 +1445,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
